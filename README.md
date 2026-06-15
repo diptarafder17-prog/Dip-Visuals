@@ -18,4 +18,4 @@ This project showcases clean UI design, sleek gradients, and professional layout
 ## 🔧 How to Run
 1. Clone the repo:  
    ```bash
-   git clone https://github.com/username/repo-name.git---
+   git clone("https://diptarafder17-prog.github.io/Dip-Visuals/")---

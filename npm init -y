@@ -1,0 +1,3 @@
+git add server.js script.js config.yml package.json
+git commit -m "Add Node.js, JS, and YAML files"
+git push origin main

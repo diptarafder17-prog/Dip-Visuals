@@ -1,0 +1,10 @@
+site:
+  name: "Dip Portfolio"
+  author: "Dip Tarafder"
+  email: "diptarafder17@gmail.com"
+  links:
+    website: "https://780695.8b.io/"
+    facebook: "https://www.facebook.com/share/1BLF2DYyaC/"
+server:
+  port: 3000
+  api_enabled: true

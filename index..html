@@ -1,73 +1,197 @@
-git add index.html
-git commit -m "Add portfolio site"
-git push origin main
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dip Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dip — Portfolio</title>
+  <meta name="description" content="Dip — UI designer & front-end developer. Modern minimal portfolio built with HTML & CSS." />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0a0f2c, #1a1f4d);
-      color: #fff;
-      text-align: center;
+    :root{
+      --bg-1:#071029; --bg-2:#0f1b3a; --accent:#7be4ff; --accent-2:#9b7bff;
+      --card:rgba(255,255,255,0.04); --muted:rgba(255,255,255,0.75); --radius:14px;
+      --max-width:1100px; --mono:ui-monospace, Menlo, Monaco, "Roboto Mono", monospace;
+      --ease:cubic-bezier(.2,.9,.3,1);
     }
-    header {
-      padding: 40px;
-      background: rgba(255,255,255,0.05);
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0; min-height:100%; font-family:Inter, system-ui, Roboto, Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(155,123,255,0.08), transparent 8%),
+                  radial-gradient(900px 500px at 90% 90%, rgba(123,228,255,0.06), transparent 8%),
+                  linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color:#eaf6ff; -webkit-font-smoothing:antialiased; display:flex; align-items:flex-start;
+      justify-content:center; padding:40px 20px;
     }
-    h1 {
-      font-size: 2.5em;
-      margin: 0;
+    .wrap{width:100%; max-width:var(--max-width); backdrop-filter:blur(6px)}
+    header{display:flex; align-items:center; justify-content:space-between; gap:20px;
+      padding:18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow:0 6px 30px rgba(2,6,23,0.6); margin-bottom:28px;
     }
-    p {
-      font-size: 1.2em;
-      opacity: 0.8;
+    .brand{display:flex; gap:14px; align-items:center}
+    .logo{width:56px; height:56px; border-radius:12px; background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex; align-items:center; justify-content:center; font-weight:700; color:#071029; font-family:var(--mono);
+      box-shadow:0 6px 18px rgba(11,18,40,0.6);
     }
-    section {
-      padding: 50px 20px;
+    .brand h1{margin:0; font-size:1.05rem} .brand p{margin:0; font-size:0.85rem; color:var(--muted)}
+    nav{display:flex; gap:12px; align-items:center}
+    .btn{padding:10px 14px; border-radius:10px; background:transparent; color:var(--muted);
+      border:1px solid rgba(255,255,255,0.04); cursor:pointer; font-weight:600; transition:all .25s var(--ease);
     }
-    .card {
-      background: rgba(255,255,255,0.1);
-      border-radius: 12px;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 600px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    .btn:hover{transform:translateY(-3px); color:#fff}
+    .cta{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#071029; border:none}
+    main{display:grid; grid-template-columns:1fr 380px; gap:28px; align-items:start}
+    .hero{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:28px; border-radius:var(--radius);
+      box-shadow:0 10px 40px rgba(2,6,23,0.6);
     }
-    footer {
-      padding: 20px;
-      font-size: 0.9em;
-      opacity: 0.6;
+    .intro{display:flex; gap:18px; align-items:center}
+    .avatar{width:96px; height:96px; border-radius:16px; background:linear-gradient(135deg,#fff2 0%, rgba(255,255,255,0.06) 100%);
+      display:flex; align-items:center; justify-content:center; font-family:var(--mono); color:#071029; font-weight:700; font-size:1.2rem;
+      box-shadow:0 8px 30px rgba(0,0,0,0.5); flex-shrink:0;
     }
+    .intro h2{margin:0; font-size:1.6rem} .intro p{margin:6px 0 0; color:var(--muted)}
+    .tags{margin-top:16px; display:flex; gap:8px; flex-wrap:wrap}
+    .tag{background:var(--card); padding:8px 10px; border-radius:999px; font-size:0.85rem; color:var(--muted); border:1px solid rgba(255,255,255,0.02)}
+    .about{margin-top:20px; color:rgba(234,246,255,0.9); line-height:1.6; font-size:0.98rem}
+    .projects{margin-top:22px; display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+    .project{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); padding:14px; border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03); transition:transform .28s var(--ease), box-shadow .28s var(--ease);
+    }
+    .project:hover{transform:translateY(-8px); box-shadow:0 18px 50px rgba(2,6,23,0.6)}
+    .project h3{margin:0 0 6px; font-size:1rem} .project p{margin:0; color:var(--muted); font-size:0.88rem}
+    aside{position:relative; top:0}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px; border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03); box-shadow:0 8px 30px rgba(2,6,23,0.5);
+    }
+    .skill{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px}
+    .meter{height:8px; background:rgba(255,255,255,0.03); border-radius:999px; overflow:hidden; flex:1; margin-left:12px}
+    .meter > i{display:block; height:100%; background:linear-gradient(90deg,var(--accent),var(--accent-2)); width:60%; transition:width .6s var(--ease)}
+    .contact-form{display:flex; flex-direction:column; gap:10px; margin-top:12px}
+    .input, textarea{width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:inherit; font-size:0.95rem; resize:vertical}
+    .send{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 12px; border-radius:10px; border:none; background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#071029; font-weight:700; cursor:pointer}
+    footer{margin-top:22px; text-align:center; color:rgba(234,246,255,0.6); font-size:0.9rem}
+    @media (max-width:980px){ main{grid-template-columns:1fr} .projects{grid-template-columns:1fr} .wrap{padding-bottom:40px} }
+    @media (max-width:520px){ header{flex-direction:column; align-items:flex-start; gap:12px} .avatar{width:76px;height:76px} }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Welcome to Dip’s Portfolio</h1>
-    <p>Modern minimal design • Clean UI • Professional visuals</p>
-  </header>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">D</div>
+        <div>
+          <h1>Dip</h1>
+          <p>UI Designer • Front-end Developer</p>
+        </div>
+      </div>
 
-  <section>
-    <div class="card">
-      <h2>About Me</h2>
-      <p>I create sleek HTML/CSS layouts, profile branding, and professional UI designs.</p>
-    </div>
-    <div class="card">
-      <h2>Projects</h2>
-      <p>• Profile pages<br>• Streaming layouts<br>• Custom web demos</p>
-    </div>
-    <div class="card">
-      <h2>Contact</h2>
-      <p>Email: yourname@example.com</p>
-    </div>
-  </section>
+      <nav>
+        <button class="btn">Projects</button>
+        <button class="btn">About</button>
+        <a class="btn" href="https://780695.8b.io/" target="_blank" rel="noopener">Website</a>
+        <a class="btn" href="https://www.facebook.com/share/1BLF2DYyaC/" target="_blank" rel="noopener">Facebook</a>
+        <a class="btn cta" href="mailto:diptarafder17@gmail.com">Email Me</a>
+      </nav>
+    </header>
 
-  <footer>
-    <p>© 2026 Dip — Powered by GitHub Pages</p>
-  </footer>
+    <main>
+      <section class="hero" aria-labelledby="intro-title">
+        <div class="intro" id="intro-title">
+          <div class="avatar">DP</div>
+          <div>
+            <h2>Hi, I’m Dip — I craft clean interfaces</h2>
+            <p>Designing minimal, usable web experiences and polished profile branding.</p>
+
+            <div class="tags" aria-hidden="true">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">React</span>
+              <span class="tag">UI / Branding</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="about">
+          I build modern, responsive websites and UI components with a focus on clarity and performance.
+          My work blends minimal aesthetics with practical interactions — perfect for portfolios, landing pages, and product demos.
+        </p>
+
+        <div class="projects" aria-label="Featured projects">
+          <article class="project">
+            <h3>Profile Landing</h3>
+            <p>Custom profile page with animated avatar, social links, and portfolio highlights.</p>
+          </article>
+
+          <article class="project">
+            <h3>Streamer Overlay</h3>
+            <p>Clean streaming layout with alerts, panels, and responsive chat area.</p>
+          </article>
+
+          <article class="project">
+            <h3>UI Kit</h3>
+            <p>Reusable components and color system for fast prototyping and consistent visuals.</p>
+          </article>
+
+          <article class="project">
+            <h3>Mini E‑shop</h3>
+            <p>Product grid, cart UI, and checkout flow demo built with vanilla JS.</p>
+          </article>
+        </div>
+      </section>
+
+      <aside>
+        <div class="panel" aria-labelledby="skills-title">
+          <h4 id="skills-title">Skills</h4>
+
+          <div class="skill">
+            <strong>HTML & CSS</strong>
+            <div class="meter" title="92%"><i style="width:92%"></i></div>
+          </div>
+
+          <div class="skill">
+            <strong>JavaScript</strong>
+            <div class="meter" title="74%"><i style="width:74%"></i></div>
+          </div>
+
+          <div class="skill">
+            <strong>React</strong>
+            <div class="meter" title="68%"><i style="width:68%"></i></div>
+          </div>
+
+          <div class="skill">
+            <strong>Branding</strong>
+            <div class="meter" title="82%"><i style="width:82%"></i></div>
+          </div>
+
+          <h4 style="margin-top:16px">Contact</h4>
+          <p style="margin:6px 0 12px;color:var(--muted)">Email me at <a href="mailto:diptarafder17@gmail.com" style="color:var(--accent); text-decoration:none;">diptarafder17@gmail.com</a></p>
+
+          <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks — message simulated.');">
+            <input class="input" type="text" placeholder="Your name" required />
+            <input class="input" type="email" placeholder="Email address" required />
+            <textarea class="input" rows="4" placeholder="Short message"></textarea>
+            <button class="send" type="submit">Send message</button>
+          </form>
+        </div>
+
+        <footer>
+          <p>© 2026 Dip — Built with HTML & CSS • Hosted on GitHub Pages</p>
+        </footer>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      const buttons = document.querySelectorAll('nav .btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const text = btn.textContent.trim().toLowerCase();
+          if(text === 'projects') document.querySelector('.projects').scrollIntoView({behavior:'smooth', block:'center'});
+          if(text === 'about') document.querySelector('.about').scrollIntoView({behavior:'smooth', block:'center'});
+          if(text === 'contact') document.querySelector('.contact-form').scrollIntoView({behavior:'smooth', block:'center'});
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
